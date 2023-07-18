@@ -1,0 +1,11 @@
+.headerContainer{
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--background-secondary);
+  padding: 1%;
+}
+
+.toggleContainer{
+  display: flex;
+  font-weight: bold;
+}

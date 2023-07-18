@@ -1,0 +1,19 @@
+.loginPageContainer{
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  width: 100%;
+  height: 94.8vh;
+}
+
+.loginWrapper{
+  width: 50%;
+  margin: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  padding-bottom: 3%;
+}
