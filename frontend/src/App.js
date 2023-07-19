@@ -13,6 +13,13 @@ function App() {
 
   const [credentials, setCredentials] = useState({loggedIn: false, guest: true, username: '', firstname: '', lastname: '', id: null});
 
+  useEffect(() => {
+    console.log('rendering again.')
+    if (localStorage.getItem('CurrentUser') !== null) {
+      setCredentials(JSON.parse(localStorage.getItem("CurrentUser")));
+    }
+  },[])
+
   if (!credentials?.loggedIn) {
     return (
       <appContext.Provider value={{credentials, setCredentials}}>
@@ -24,8 +31,9 @@ function App() {
 
   return (
     <appContext.Provider value={{credentials, setCredentials}}>
+      <Header />
       <Routes>
-        <Route path='/' element={<><Header /><LandingPage /></>} />
+        <Route path='/' element={<LandingPage />}/>
       </Routes>
     </appContext.Provider>
   );

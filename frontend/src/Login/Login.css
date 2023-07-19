@@ -7,7 +7,7 @@
   height: 94.8vh;
 }
 
-.loginWrapper{
+.loginWrapperContainer{
   width: 50%;
   margin: 1%;
   display: flex;
@@ -16,4 +16,24 @@
   justify-content: center;
   background: var(--accent);
   padding-bottom: 3%;
+  border-radius: 15px;
+}
+
+.loginWrapper{
+  width: 50%;
+  margin: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+}
+
+.buttonContainer{
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 1vh;
 }
