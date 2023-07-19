@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import './LandingPage.css';
 import ItemDisplay from "../ItemDisplay/ItemDisplay";
-import { appContext } from '../App';
+// import { appContext } from '../App';
 
 export default function LandingPage() {
 
-  const {credentials, setCredentials} = React.useContext(appContext);
+  // const {credentials, setCredentials} = React.useContext(appContext);
 
   const [itemsList, setItemsList] = useState([{itemname: '', quantity: 0, description:''}]);
   const [isEditable, setIsEditable] = useState(false);
   const [saveEdit, setSaveEdit] = useState(false);
 
   useEffect(() => {
-    console.log('fetching')
     fetch('http://localhost:8080/inventory/all')
     .then(response => response.json())
     .then(data => {

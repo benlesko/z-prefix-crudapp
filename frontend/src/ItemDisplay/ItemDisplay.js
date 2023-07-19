@@ -1,10 +1,12 @@
 import React , {useState, useEffect} from "react";
 import './ItemDisplay.css';
-import { appContext } from '../App';
+import _ from 'lodash';
+// import { appContext } from '../App';
 
 export default function ItemDisplay(props) {
 
-  const {credentials, setCredentials} = React.useContext(appContext);
+  // const {credentials, setCredentials} = React.useContext(appContext);
+  const {saveEdit} = props;
 
   const [itemName, setItemName] = useState('');
   const [itemQuantity, setItemQuantity] = useState(0);
@@ -14,24 +16,35 @@ export default function ItemDisplay(props) {
     setItemName(props.item?.itemname);
     setItemQuantity(props.item?.quantity);
     setItemDesc(props.item?.description);
-  },[])
+  },[props.item?.itemname, props.item?.quantity, props.item?.description])
 
   useEffect(() => {
     if(props.saveEdit){
-      console.log('saving...')
       saveAllEdits();
       props.setSaveEdit(false);
       props.setIsEditable(false);
     }
-  },[props.saveEdit])
+  },[saveEdit])
+
+  async function patchNewEdits (details) {
+    return fetch(`http://localhost:8080/inventory/${props.item?.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(details)
+    })
+      .then(data => data.json())
+  }
 
   const saveAllEdits = () => {
     let updatedItem = props.itemsList[props.index];
     updatedItem = {...props.itemsList[props.index], itemname: itemName, quantity: itemQuantity, description: itemDesc};
-    console.log(updatedItem)
-    // props.setItemsList(updatedList)
+    
+    if(!_.isEqual(updatedItem, props.itemsList[props.index])){
+      patchNewEdits(updatedItem);
+    }
 
-    // Send patch request if object is different
   }
 
   const handleTitleEdit = (event) => {

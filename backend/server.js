@@ -20,6 +20,21 @@ app.get('/inventory/all', (req,res) => {
     );
 })
 
+app.patch('/inventory/:itemid', function(req, res) {    
+  knex('item')
+    .where('item.id',req.params.itemid)
+    .update({
+      itemname: req.body.itemname, 
+      quantity: req.body.quantity, 
+      description: req.body.description
+    }, ['*'])
+    .catch(err =>
+      res.status(404).json({
+        message:'Failed to save edits, please try again.'
+      })
+    );
+});
+
 app.post('/login/', (req,res) => {
   knex('user').select('username').where('username',req.body.username)
     .then(data => {
