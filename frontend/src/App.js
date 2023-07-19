@@ -14,7 +14,6 @@ function App() {
   const [credentials, setCredentials] = useState({loggedIn: false, guest: true, username: '', firstname: '', lastname: '', id: null});
 
   useEffect(() => {
-    console.log('rendering again.')
     if (localStorage.getItem('CurrentUser') !== null) {
       setCredentials(JSON.parse(localStorage.getItem("CurrentUser")));
     }

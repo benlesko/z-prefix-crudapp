@@ -25,7 +25,7 @@
 
 .toggleContainer{
   display: flex;
-  align-items: center;
+  align-items: stretch;
   font-weight: bold;
 }
 
@@ -39,5 +39,8 @@
 }
 
 .logoutButtonContainer button{
+  padding-top: 5%;
+  padding-bottom: 5%;
   height: 75%;
+  max-height: 40px;
 }

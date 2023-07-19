@@ -35,12 +35,29 @@
   width: 15%;
 }
 
-.inventoryOptionsContainer button{
+.inventoryOptionsContainerButtonContainer{
   height: 30%;
   min-height: 100px;
+}
+
+.inventoryOptionsContainer button{
+  height: 100%;
+  width: 100%;
   padding: 0;
   overflow-wrap: break-word;
   overflow: hidden;
+}
+
+.editOptionsButtonContainer{
+  height: 30%;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10%;
+}
+
+.editOptionsButtonContainer button{
+  height: 45%;
 }
 
 .inventoryViewContainer{
@@ -48,19 +65,21 @@
   height: 95%;
   border: 1px solid var(--background-secondary);
   border-radius: 15px;
-  padding: 0.75%;
+  padding: 1%;
   padding-right: 0px;
   padding-left: 0px;
-  width: 81%;
+  width: 80%;
 }
 
 .inventoryViewContainerInternal{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  align-content: flex-start;
   height: 100%;
   width: 100%;
-  row-gap: 5px;
+  column-gap: 5px;
+  row-gap: 15px;
   overflow-y: scroll;
 }
 
