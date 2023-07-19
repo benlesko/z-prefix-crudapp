@@ -7,7 +7,7 @@ import { appContext } from '../App';
 
 export default function Login() {
 
-  const { credentials, setCredentials } = React.useContext(appContext);
+  const { setCredentials } = React.useContext(appContext);
 
   const [newFirstname, setNewFirstName] = useState();
   const [newLastname, setNewLastName] = useState();

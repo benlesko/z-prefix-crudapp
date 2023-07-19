@@ -1,0 +1,15 @@
+.itemDisplayContainer {
+  width: 45%;
+  height: 25%;
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  background: var(--background-secondary);
+  border-radius: 15px;
+  opacity: 0.80;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(13.8px);
+  -webkit-backdrop-filter: blur(13.8px);
+  border: 1px solid var(--background-secondary);
+  column-gap: 1%;
+}

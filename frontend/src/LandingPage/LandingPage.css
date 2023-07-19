@@ -1,0 +1,87 @@
+.landingPageContainer{
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  width: 100%;
+  height: 90%
+}
+
+.landingPageContentContainer{
+  width: 90%;
+  height: 85%;
+  padding: 1%;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 15px;
+  background: var(--background);
+  opacity: 0.80;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(13.8px);
+  -webkit-backdrop-filter: blur(13.8px);
+  border: 1px solid var(--background-secondary);
+  column-gap: 1%;
+}
+
+.inventoryOptionsContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 95%;
+  border: 1px solid var(--background-secondary);
+  border-radius: 15px;
+  padding: 1%;
+  row-gap: 50px;
+  width: 15%;
+}
+
+.inventoryOptionsContainer button{
+  height: 30%;
+  min-height: 100px;
+  padding: 0;
+  overflow-wrap: break-word;
+  overflow: hidden;
+}
+
+.inventoryViewContainer{
+  display: flex;
+  height: 95%;
+  border: 1px solid var(--background-secondary);
+  border-radius: 15px;
+  padding: 0.75%;
+  padding-right: 0px;
+  padding-left: 0px;
+  width: 81%;
+}
+
+.inventoryViewContainerInternal{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 100%;
+  row-gap: 5px;
+  overflow-y: scroll;
+}
+
+.inventoryViewContainerInternal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.inventoryViewContainerInternal::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+}
+
+.inventoryViewContainerInternal::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 15px;
+  background: var(--accent);
+  opacity: 0.8;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+.inventoryViewContainerInternal::-webkit-scrollbar-thumb:window-inactive {
+  background: var(--accent);
+  opacity: 0.4;
+}

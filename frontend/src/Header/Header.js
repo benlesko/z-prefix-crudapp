@@ -9,9 +9,14 @@ import "react-toggle/style.css"
 
 export default function Header() {
 
-  const {credentials} = React.useContext(appContext);
+  const { credentials, setCredentials } = React.useContext(appContext);
 
   const [darkMode, setDarkMode] = useState('true');
+
+  const logOut = () => {
+    localStorage.removeItem('CurrentUser')
+    setCredentials({ loggedIn: false, guest: true, username: '', firstname: '', lastname: '', id: null });
+  }
 
   //Dark mode switching
   useEffect(() => {
@@ -24,12 +29,18 @@ export default function Header() {
 
   return (
     <div className='headerContainer'>
-      {credentials?.loggedIn?
-        credentials?.guest?<div>Welcome, guest</div>:<div>Welcome, {credentials.firstname}</div>
-        :<div>Welcome</div>
-      }
-      <div className='toggleContainer'>
-        <Toggle className='themeToggle' checked={darkMode} onChange={() => { setDarkMode(!darkMode) }} />&nbsp;Dark Mode
+      <div className='welcomeTextContainer'>
+        {credentials?.loggedIn ?
+          credentials?.guest ? <div>Welcome, guest</div> : <div>Welcome, {credentials.firstname}</div>
+          : <div>Welcome</div>
+        }
+      </div>
+      <div className="rightSideContainer">
+        <div className="logoutButtonContainer">{credentials?.loggedIn ? <button onClick={() => { logOut() }}>Log Out</button> : <></>}</div>
+        <div className='toggleContainer'>
+          <Toggle className='themeToggle' checked={darkMode} onChange={() => { setDarkMode(!darkMode) }} />
+          <div className="toggleText">Dark Mode</div>
+        </div>
       </div>
     </div>
   )
