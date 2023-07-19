@@ -10,6 +10,7 @@ export default function LandingPage() {
   const [itemsList, setItemsList] = useState([{itemname: '', quantity: 0, description:''}]);
   const [isEditable, setIsEditable] = useState(false);
   const [saveEdit, setSaveEdit] = useState(false);
+  const [targetItem, setTargetItem] = useState({active: false, itemId: 1})
 
   useEffect(() => {
     fetch('http://localhost:8080/inventory/all')
@@ -51,15 +52,23 @@ export default function LandingPage() {
             </div>
           }
         </div>
-        
+
         <div className="inventoryViewContainer">
+        {targetItem?.active? 
+          <div className="individualItemViewContainer">
+            <ItemDisplay targetItem = {targetItem} setTargetItem = {setTargetItem} index = {itemsList.map(item=>item.id).indexOf(targetItem.itemId)} item = {itemsList.filter(item=>item.id === targetItem.itemId)[0]} itemsList = {itemsList} setItemsList = {setItemsList}
+                isEditable = {isEditable} setIsEditable = {setIsEditable} saveEdit = {saveEdit} setSaveEdit = {setSaveEdit}/>
+            <button onClick={() => {setTargetItem({active: false, itemId: 1})}}>Back to Inventory</button>
+          </div>:
           <div className="inventoryViewContainerInternal">
             {itemsList.map((item, index) => {
-              return(<ItemDisplay index = {index} item = {item} itemsList = {itemsList} setItemsList = {setItemsList}
+              return(<ItemDisplay setTargetItem = {setTargetItem} index = {index} item = {item} itemsList = {itemsList} setItemsList = {setItemsList}
                 isEditable = {isEditable} setIsEditable = {setIsEditable} saveEdit = {saveEdit} setSaveEdit = {setSaveEdit}/>)
             })}
+          </div>
+        }
         </div>
-        </div>
+        
       </div>
     </div>
   )

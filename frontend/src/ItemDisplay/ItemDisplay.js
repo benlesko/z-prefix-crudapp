@@ -6,7 +6,7 @@ import _ from 'lodash';
 export default function ItemDisplay(props) {
 
   // const {credentials, setCredentials} = React.useContext(appContext);
-  const {saveEdit, setSaveEdit, isEditable, setIsEditable} = props;
+  const {saveEdit, setSaveEdit, isEditable, setIsEditable, setTargetItem, targetItem} = props;
 
   const [itemName, setItemName] = useState('');
   const [itemQuantity, setItemQuantity] = useState(0);
@@ -27,6 +27,9 @@ export default function ItemDisplay(props) {
   })
 
   async function deleteItem () {
+    if(targetItem?.active){
+      setTargetItem({active: false, itemId: 1});
+    }
     return fetch(`http://localhost:8080/inventory/${props.item?.id}`, {
       method: 'DELETE'
     })
@@ -81,13 +84,13 @@ export default function ItemDisplay(props) {
         <div contentEditable={isEditable} suppressContentEditableWarning={true} onInput={handleQuantityEdit}>{props.item?.quantity}</div>
       </div>
       <div className="itemDescText" contentEditable={isEditable} suppressContentEditableWarning={true} onInput={handleDescEdit}>
-        { isEditable? props.item?.description :
+        { isEditable || targetItem?.active? props.item?.description:
         props.item?.description.length > 100? props.item?.description.slice(0,100)+'...' : props.item?.description }
       </div>
       {isEditable?<></>:
       <div className="itemButtonContainer">
+        {targetItem?.active?<></>:<button onClick={() => {setTargetItem({active: true, itemId: props.item?.id})}}>View</button>}
         <button onClick={() => {deleteItem()}}>Delete</button>
-        <button onClick={() => {}}>View</button>
       </div>
       }
     </div>
