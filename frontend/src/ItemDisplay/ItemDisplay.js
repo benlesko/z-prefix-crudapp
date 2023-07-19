@@ -1,11 +1,11 @@
 import React , {useState, useEffect} from "react";
 import './ItemDisplay.css';
 import _ from 'lodash';
-// import { appContext } from '../App';
+import { appContext } from '../App';
 
 export default function ItemDisplay(props) {
 
-  // const {credentials, setCredentials} = React.useContext(appContext);
+  const {credentials} = React.useContext(appContext);
   const {saveEdit, setSaveEdit, isEditable, setIsEditable, setTargetItem, targetItem} = props;
 
   const [itemName, setItemName] = useState('');
@@ -90,7 +90,7 @@ export default function ItemDisplay(props) {
       {isEditable?<></>:
       <div className="itemButtonContainer">
         {targetItem?.active?<></>:<button onClick={() => {setTargetItem({active: true, itemId: props.item?.id})}}>View</button>}
-        <button onClick={() => {deleteItem()}}>Delete</button>
+        {credentials?.guest?<></>:<button onClick={() => {deleteItem()}}>Delete</button>}
       </div>
       }
     </div>

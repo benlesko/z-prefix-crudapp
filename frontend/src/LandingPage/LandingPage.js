@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import './LandingPage.css';
 import ItemDisplay from "../ItemDisplay/ItemDisplay";
-// import { appContext } from '../App';
+import { appContext } from '../App';
 
 export default function LandingPage() {
 
-  // const {credentials, setCredentials} = React.useContext(appContext);
+  const {credentials} = React.useContext(appContext);
 
   const [itemsList, setItemsList] = useState([{itemname: '', quantity: 0, description:''}]);
   const [isEditable, setIsEditable] = useState(false);
@@ -33,6 +33,29 @@ export default function LandingPage() {
     setSaveEdit(true);
   }
 
+  if(credentials?.guest){
+    return (
+      <div className='landingPageContainer'>
+      <div className="landingPageContentContainer">
+        <div className="inventoryViewContainerGuest">
+        {targetItem?.active? 
+          <div className="individualItemViewContainer">
+            <ItemDisplay targetItem = {targetItem} setTargetItem = {setTargetItem} index = {itemsList.map(item=>item.id).indexOf(targetItem.itemId)} item = {itemsList.filter(item=>item.id === targetItem.itemId)[0]} itemsList = {itemsList} setItemsList = {setItemsList}
+                isEditable = {isEditable} setIsEditable = {setIsEditable} saveEdit = {saveEdit} setSaveEdit = {setSaveEdit}/>
+            <button onClick={() => {setTargetItem({active: false, itemId: 1})}}>Back to Inventory</button>
+          </div>:
+          <div className="inventoryViewContainerInternal">
+            {itemsList.map((item, index) => {
+              return(<ItemDisplay setTargetItem = {setTargetItem} index = {index} item = {item} itemsList = {itemsList} setItemsList = {setItemsList}
+                isEditable = {isEditable} setIsEditable = {setIsEditable} saveEdit = {saveEdit} setSaveEdit = {setSaveEdit}/>)
+            })}
+          </div>
+        }
+        </div>
+      </div>
+    </div>
+    )
+  }
 
   return (
     <div className='landingPageContainer'>

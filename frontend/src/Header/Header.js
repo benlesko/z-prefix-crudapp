@@ -31,12 +31,12 @@ export default function Header() {
     <div className='headerContainer'>
       <div className='welcomeTextContainer'>
         {credentials?.loggedIn ?
-          credentials?.guest ? <div>Welcome, guest</div> : <div>Welcome, {credentials.firstname}</div>
+          credentials?.guest ? <div>Welcome, Guest</div> : <div>Welcome, {credentials.firstname}</div>
           : <div>Welcome</div>
         }
       </div>
       <div className="rightSideContainer">
-        <div className="logoutButtonContainer">{credentials?.loggedIn ? <button onClick={() => { logOut() }}>Log Out</button> : <></>}</div>
+        <div className="logoutButtonContainer">{credentials?.loggedIn ? credentials?.guest? <button onClick={() => { logOut() }}>Back to login</button> :<button onClick={() => { logOut() }}>Log Out</button> : <></>}</div>
         <div className='toggleContainer'>
           <Toggle className='themeToggle' checked={darkMode} onChange={() => { setDarkMode(!darkMode) }} />
           <div className="toggleText">Dark Mode</div>

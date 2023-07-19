@@ -7,7 +7,7 @@ import { appContext } from '../App';
 
 export default function Login() {
 
-  const { setCredentials } = React.useContext(appContext);
+  const { credentials, setCredentials } = React.useContext(appContext);
 
   const [newFirstname, setNewFirstName] = useState();
   const [newLastname, setNewLastName] = useState();
@@ -73,6 +73,10 @@ export default function Login() {
     }
   }
 
+  const loginAsGuest = () =>{
+    setCredentials({ ...credentials, loggedIn: true, guest: true});
+  }
+
   const swapLoginView = () => {
     setNewFirstName('');
     setNewLastName('');
@@ -134,6 +138,7 @@ export default function Login() {
           <div className='buttonContainer' >
             <button type="submit">Submit</button>
             <button type='button' onClick={swapLoginView}>Create a new account</button>
+            <button type='button' onClick={loginAsGuest}>Continue as a guest</button>
           </div>
         </form>
       </div>

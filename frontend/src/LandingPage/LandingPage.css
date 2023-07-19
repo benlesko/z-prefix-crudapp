@@ -71,6 +71,17 @@
   width: 80%;
 }
 
+.inventoryViewContainerGuest{
+  display: flex;
+  height: 95%;
+  border: 1px solid var(--background-secondary);
+  border-radius: 15px;
+  padding: 1%;
+  padding-right: 0px;
+  padding-left: 0.5%;
+  width: 100%;
+}
+
 .individualItemViewContainer{
   display: flex;
   flex-direction: column;
