@@ -35,6 +35,18 @@ app.patch('/inventory/:itemid', function(req, res) {
     );
 });
 
+app.delete('/inventory/:itemid', function(req, res) {    
+  knex('item')
+    .where('item.id',req.params.itemid)
+    .del()
+    .then(res.status(200).json('Item successfully removed.'))
+    .catch(err =>
+      res.status(404).json({
+        message:'Failed to delete item, please try again.'
+      })
+    );
+});
+
 app.post('/login/', (req,res) => {
   knex('user').select('username').where('username',req.body.username)
     .then(data => {

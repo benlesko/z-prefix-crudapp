@@ -30,3 +30,20 @@
 .itemQuantityText{
   display: flex;
 }
+
+.itemButtonContainer{
+  margin-top: 1%;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.itemButtonContainer button{
+  width: 49%;
+  margin: 0;
+  padding: 0;
+}
+
+.itemButtonContainer button:hover{
+  background-color: var(--accent);
+}

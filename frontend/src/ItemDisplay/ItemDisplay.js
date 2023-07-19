@@ -6,7 +6,7 @@ import _ from 'lodash';
 export default function ItemDisplay(props) {
 
   // const {credentials, setCredentials} = React.useContext(appContext);
-  const {saveEdit} = props;
+  const {saveEdit, setSaveEdit, isEditable, setIsEditable} = props;
 
   const [itemName, setItemName] = useState('');
   const [itemQuantity, setItemQuantity] = useState(0);
@@ -21,10 +21,22 @@ export default function ItemDisplay(props) {
   useEffect(() => {
     if(props.saveEdit){
       saveAllEdits();
-      props.setSaveEdit(false);
-      props.setIsEditable(false);
+      setSaveEdit(false);
+      setIsEditable(false);
     }
-  },[saveEdit])
+  })
+
+  async function deleteItem () {
+    return fetch(`http://localhost:8080/inventory/${props.item?.id}`, {
+      method: 'DELETE'
+    })
+      .then(data => {
+        //kinda hacky way to re-render without extra state
+        setSaveEdit(!saveEdit);
+        setSaveEdit(!saveEdit);
+        return(data.json())
+      })
+  }
 
   async function patchNewEdits (details) {
     return fetch(`http://localhost:8080/inventory/${props.item?.id}`, {
@@ -62,16 +74,22 @@ export default function ItemDisplay(props) {
 
   return (
     <div className='itemDisplayContainer'>
-      <div className="itemNameText" contentEditable={props.isEditable} suppressContentEditableWarning={true} onInput={handleTitleEdit}>
+      <div className="itemNameText" contentEditable={isEditable} suppressContentEditableWarning={true} onInput={handleTitleEdit}>
         {props.item?.itemname}</div>
       <div className="itemQuantityText">
         <div>Quantity:&nbsp;</div>
-        <div contentEditable={props.isEditable} suppressContentEditableWarning={true} onInput={handleQuantityEdit}>{props.item?.quantity}</div>
+        <div contentEditable={isEditable} suppressContentEditableWarning={true} onInput={handleQuantityEdit}>{props.item?.quantity}</div>
       </div>
-      <div className="itemDescText" contentEditable={props.isEditable} suppressContentEditableWarning={true} onInput={handleDescEdit}>
-        { props.isEditable? props.item?.description :
+      <div className="itemDescText" contentEditable={isEditable} suppressContentEditableWarning={true} onInput={handleDescEdit}>
+        { isEditable? props.item?.description :
         props.item?.description.length > 100? props.item?.description.slice(0,100)+'...' : props.item?.description }
       </div>
+      {isEditable?<></>:
+      <div className="itemButtonContainer">
+        <button onClick={() => {deleteItem()}}>Delete</button>
+        <button onClick={() => {}}>View</button>
+      </div>
+      }
     </div>
   )
 }
