@@ -1,17 +1,26 @@
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
-module.exports = {
+// module.exports = {
+
+//     development: {
+//       client: 'pg',
+//       connection: {
+//         host: '127.0.0.1',
+//         password: 'docker',
+//         user: 'postgres',
+//         port: 5432,
+//         database: 'zcrudappdb'
+//       }
+//     }
+  
+//   };
+
+  module.exports = {
 
     development: {
       client: 'pg',
-      connection: {
-        host: '127.0.0.1',
-        password: 'docker',
-        user: 'postgres',
-        port: 5432,
-        database: 'zcrudappdb'
-      }
+      connection: process.env.DB_CONNECTION_STRING
     }
   
   };

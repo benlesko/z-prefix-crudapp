@@ -1,0 +1,48 @@
+version: "3"
+
+services: 
+  db:
+    image: postgres
+    container_name: postgres_db
+    ports:
+      - "5432:5432"
+    networks:
+      - my_network
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: db
+    volumes:
+      - ./docker/data/db:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    networks:
+      - my_network
+    volumes:
+      - ./backend:/app
+    environment:
+      DB_CONNECTION_STRING: postgres://postgres:docker@db:5432/db
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - my_network
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
+
+networks:
+  my_network:
+    driver: bridge
+
+volumes:
+  frontend-vol:
+  backend-vol:
