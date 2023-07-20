@@ -1,13 +1,14 @@
-.loginPageContainer{
+.newItemPageContainer{
   height: 95%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   align-content: center;
   justify-content: center;
   font-weight: bold;
 }
 
-.loginWrapperContainer{
+.newItemWrapperContainer{
   width: 50%;
   margin: 1%;
   display: flex;
@@ -25,7 +26,8 @@
   border: 1px solid var(--background-secondary)
 }
 
-.loginWrapper{
+.newItemWrapper{
+  text-align: center;
   width: 50%;
   margin: 1%;
   display: flex;
@@ -34,18 +36,13 @@
   justify-content: center;
 }
 
-.loginWrapper input{
+.newItemWrapper input{
   width: 100%;
   max-width: 100%;
 }
 
-.loginWrapper button{
-  min-width: 60%;
-}
-
 .buttonContainer{
   margin-top: 10%;
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

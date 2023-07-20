@@ -6,7 +6,7 @@ import { appContext } from '../App';
 export default function ItemDisplay(props) {
 
   const {credentials} = React.useContext(appContext);
-  const {saveEdit, setSaveEdit, isEditable, setIsEditable, setTargetItem, targetItem} = props;
+  const {saveEdit, setSaveEdit, isEditable, setIsEditable, setTargetItem, targetItem, allItemView} = props;
 
   const [itemName, setItemName] = useState('');
   const [itemQuantity, setItemQuantity] = useState(0);
@@ -23,6 +23,7 @@ export default function ItemDisplay(props) {
       saveAllEdits();
       setSaveEdit(false);
       setIsEditable(false);
+      // window.location.reload();
     }
   })
 
@@ -90,7 +91,7 @@ export default function ItemDisplay(props) {
       {isEditable?<></>:
       <div className="itemButtonContainer">
         {targetItem?.active?<></>:<button onClick={() => {setTargetItem({active: true, itemId: props.item?.id})}}>View</button>}
-        {credentials?.guest?<></>:<button onClick={() => {deleteItem()}}>Delete</button>}
+        {credentials?.guest || allItemView?<></>:<button onClick={() => {deleteItem()}}>Delete</button>}
       </div>
       }
     </div>

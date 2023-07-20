@@ -20,6 +20,16 @@ app.get('/inventory/all', (req,res) => {
     );
 })
 
+app.get('/inventory/:user_id', (req,res) => {
+  knex.select('*')
+    .from('item')
+    .where('userid',req.params.user_id)
+    .then(data => res.status(200).json(data))
+    .catch(err =>
+      res.status(404).json('Valid endpoint, but requested resource could not be found.')
+    );
+})
+
 app.patch('/inventory/:itemid', function(req, res) {    
   knex('item')
     .where('item.id',req.params.itemid)
@@ -32,6 +42,20 @@ app.patch('/inventory/:itemid', function(req, res) {
       res.status(404).json({
         message:'Failed to save edits, please try again.'
       })
+    );
+});
+
+app.post('/inventory/new', (req,res) => {
+  knex('item')
+    .insert({
+      userid: req.body.userid,
+      itemname: req.body.itemname,
+      quantity: req.body.quantity,
+      description: req.body.description
+    })
+    .then(res.status(200).json(`Your item, ${req.body.itemname}, was successfully added.`))
+    .catch(err =>
+      res.status(404).json('Failed to post new item, please try again.')
     );
 });
 

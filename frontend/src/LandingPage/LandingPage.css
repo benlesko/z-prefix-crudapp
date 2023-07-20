@@ -38,6 +38,7 @@
 .inventoryOptionsContainerButtonContainer{
   height: 30%;
   min-height: 100px;
+  flex-grow: 1;
 }
 
 .inventoryOptionsContainer button{
@@ -69,6 +70,31 @@
   padding-right: 0px;
   padding-left: 0.5%;
   width: 80%;
+}
+
+.noItemTextContainer{
+  font-weight: bold;
+  font-size: large;
+  display: flex;
+  min-width: 100%;
+  align-self: center;
+  justify-content: center;
+}
+
+.createNewItemViewContainer{
+  display: flex;
+  flex-direction: column;
+  height: 95%;
+  border: 1px solid var(--background-secondary);
+  border-radius: 15px;
+  padding: 1%;
+  padding-right: 0px;
+  padding-left: 0.5%;
+  width: 80%;
+}
+
+.exitNewItemButton{
+  width: 99.25%;
 }
 
 .inventoryViewContainerGuest{
